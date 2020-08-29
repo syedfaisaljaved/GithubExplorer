@@ -1,4 +1,4 @@
-package com.githubexplorer;
+package com.githubexplorer.activities;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.githubexplorer.R;
 import com.githubexplorer.adapters.GithubRepoListAdapter;
 import com.githubexplorer.models.GithubPublicRepo;
 import com.githubexplorer.models.Owner;

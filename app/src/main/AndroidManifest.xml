@@ -11,9 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GithubUserActivity"></activity>
-        <activity android:name=".GithubRepoActivity" />
-        <activity android:name=".GithubPublicRepoListActivity">
+        <activity android:name=".activities.GithubUserActivity"></activity>
+        <activity android:name=".activities.GithubRepoActivity" />
+        <activity android:name=".activities.GithubPublicRepoListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

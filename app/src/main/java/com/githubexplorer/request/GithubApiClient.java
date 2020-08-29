@@ -5,20 +5,16 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.githubexplorer.AppExecuters;
+import com.githubexplorer.util.AppExecuters;
 import com.githubexplorer.models.GithubPublicRepo;
 import com.githubexplorer.models.Owner;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Response;
-
-import static com.githubexplorer.util.Constant.NETWORK_TIMEOUT;
 
 public class GithubApiClient {
 

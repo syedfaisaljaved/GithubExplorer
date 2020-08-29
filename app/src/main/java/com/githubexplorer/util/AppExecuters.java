@@ -1,4 +1,4 @@
-package com.githubexplorer;
+package com.githubexplorer.util;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

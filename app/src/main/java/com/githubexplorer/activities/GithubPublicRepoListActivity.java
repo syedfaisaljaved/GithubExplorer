@@ -1,4 +1,4 @@
-package com.githubexplorer;
+package com.githubexplorer.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.githubexplorer.R;
 import com.githubexplorer.adapters.GithubRepoListAdapter;
 import com.githubexplorer.models.GithubPublicRepo;
 import com.githubexplorer.viewmodels.GitHubPublicRepoListViewModel;

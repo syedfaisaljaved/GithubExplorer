@@ -1,4 +1,4 @@
-package com.githubexplorer;
+package com.githubexplorer.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+
+import com.githubexplorer.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
