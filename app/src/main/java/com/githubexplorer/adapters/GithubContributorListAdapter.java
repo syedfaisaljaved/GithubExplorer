@@ -35,7 +35,6 @@ public class GithubContributorListAdapter extends RecyclerView.Adapter<RecyclerV
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
         ((GithubContributorListViewHolder)holder).contributorName.setText(mContributorList.get(position).getLogin());
 
         RequestOptions requestOptions = new RequestOptions()

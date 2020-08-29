@@ -25,9 +25,6 @@ public class GithubRepoListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         this.onRepoClickListener = onRepoClickListener;
     }
 
-    public GithubRepoListAdapter() {
-    }
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -92,6 +89,7 @@ public class GithubRepoListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         @Override
         public void onClick(View view) {
+
             onRepoClickListener.onClick(getAdapterPosition());
         }
     }

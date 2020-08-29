@@ -18,7 +18,7 @@ import com.githubexplorer.viewmodels.GitHubUserRepoListViewModel;
 
 import java.util.List;
 
-public class GithubUserActivity extends BaseActivity {
+public class GithubUserActivity extends BaseActivity implements GithubRepoListAdapter.OnRepoClickListener {
 
     //UI components
     private TextView userName;
@@ -56,7 +56,7 @@ public class GithubUserActivity extends BaseActivity {
 
 
     private void initRecyclerView() {
-        githubRepoListAdapter = new GithubRepoListAdapter();
+        githubRepoListAdapter = new GithubRepoListAdapter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(githubRepoListAdapter);
     }
@@ -89,5 +89,10 @@ public class GithubUserActivity extends BaseActivity {
 
     public void fetchUserRepositories(String username) {
         gitHubUserRepoListViewModel.fetchUSerRepositories(username);
+    }
+
+    @Override
+    public void onClick(int position) {
+
     }
 }

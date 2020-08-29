@@ -68,15 +68,7 @@ public class GithubApiClient {
             retrievePublicRepoListRunnable = null;
         }
         retrievePublicRepoListRunnable = new RetrievePublicRepoRunnable();
-        final Future handler = AppExecuters.getInstance().networkIO().submit(retrievePublicRepoListRunnable);
-
-        AppExecuters.getInstance().networkIO().schedule(new Runnable() {
-            @Override
-            public void run() {
-                //let user know its timed out
-                handler.cancel(true);
-            }
-        }, NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
+        AppExecuters.getInstance().networkIO().submit(retrievePublicRepoListRunnable);
     }
 
     public void fetchUserRepo(String username){
@@ -84,15 +76,7 @@ public class GithubApiClient {
             retrieveUserRepoRunnable = null;
         }
         retrieveUserRepoRunnable = new RetrieveUserRepoRunnable(username);
-        final Future handler = AppExecuters.getInstance().networkIO().submit(retrieveUserRepoRunnable);
-
-        AppExecuters.getInstance().networkIO().schedule(new Runnable() {
-            @Override
-            public void run() {
-                //let user know its timed out
-                handler.cancel(true);
-            }
-        }, NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
+        AppExecuters.getInstance().networkIO().submit(retrieveUserRepoRunnable);
     }
 
     public void fetchContributors(String user, String repo){
@@ -100,23 +84,12 @@ public class GithubApiClient {
             retrieveContributorRunnable = null;
         }
         retrieveContributorRunnable = new RetrieveContributorRunnable(user, repo);
-        final Future handler = AppExecuters.getInstance().networkIO().submit(retrieveContributorRunnable);
-
-        AppExecuters.getInstance().networkIO().schedule(new Runnable() {
-            @Override
-            public void run() {
-                //let user know its timed out
-                handler.cancel(true);
-            }
-        }, NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
+        AppExecuters.getInstance().networkIO().submit(retrieveContributorRunnable);
     }
 
     private class RetrievePublicRepoRunnable implements Runnable {
 
-        boolean cancelRequest;
-
         public RetrievePublicRepoRunnable() {
-            this.cancelRequest = false;
         }
 
         @Override
@@ -124,9 +97,6 @@ public class GithubApiClient {
 
             try {
                 Response<List<GithubPublicRepo>> response = getPublicRepo().execute();
-                if (cancelRequest){
-                    return;
-                }
                 if (response.isSuccessful()){
                     if (response.body() != null) {
                         List<GithubPublicRepo> list = new ArrayList<>();
@@ -150,21 +120,14 @@ public class GithubApiClient {
             return ServiceGenerator.getGithubApi().searchPublicRepositories();
         }
 
-        private void cancelRequest(){
-            Log.d(TAG, "cancelRequest: request cancelled");
-            cancelRequest = true;
-
-        }
     }
 
     private class RetrieveUserRepoRunnable implements Runnable {
 
         private String username;
-        boolean cancelRequest;
 
         public RetrieveUserRepoRunnable(String username) {
             this.username = username;
-            this.cancelRequest = false;
         }
 
         @Override
@@ -172,9 +135,6 @@ public class GithubApiClient {
 
             try {
                 Response<List<GithubPublicRepo>> response = getUserRepo(username).execute();
-                if (cancelRequest){
-                    return;
-                }
                 if (response.isSuccessful()){
                     if (response.body() != null) {
                         List<GithubPublicRepo> list = new ArrayList<>(response.body());
@@ -194,24 +154,16 @@ public class GithubApiClient {
         private Call<List<GithubPublicRepo>> getUserRepo(String username){
             return ServiceGenerator.getGithubApi().getUserRepositories(username);
         }
-
-        private void cancelRequest(){
-            Log.d(TAG, "cancelRequest: request cancelled");
-            cancelRequest = true;
-
-        }
     }
 
     private class RetrieveContributorRunnable implements Runnable {
 
         private String user;
         private String repo;
-        boolean cancelRequest;
 
         public RetrieveContributorRunnable(String user, String repo) {
             this.user = user;
             this.repo = repo;
-            this.cancelRequest = false;
         }
 
         @Override
@@ -219,9 +171,6 @@ public class GithubApiClient {
 
             try {
                 Response<List<Owner>> response = fetchContributors(user, repo).execute();
-                if (cancelRequest){
-                    return;
-                }
                 if (response.isSuccessful()){
                     if (response.body() != null) {
                         List<Owner> list = new ArrayList<>(response.body());
@@ -235,17 +184,10 @@ public class GithubApiClient {
                 e.printStackTrace();
                 mContributerList.postValue(null);
             }
-
         }
 
         private Call<List<Owner>> fetchContributors(String user, String repo){
             return ServiceGenerator.getGithubApi().getContributors(user, repo);
-        }
-
-        private void cancelRequest(){
-            Log.d(TAG, "cancelRequest: request cancelled");
-            cancelRequest = true;
-
         }
     }
 }
